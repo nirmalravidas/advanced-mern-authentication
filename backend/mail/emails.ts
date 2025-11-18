@@ -1,4 +1,4 @@
-import transporter from "./nodemailer";
+import { client, sender } from "./mailtrap";
 import {
   generatePasswordResetEmail,
   generatePasswordResetSuccessEmail,
@@ -7,11 +7,11 @@ import {
 } from "./emailTemplate";
 
 export const sendVerificationCodeEmail = async (email: string, verificationToken: string) => {
-  const recipient = email;
+  const recipient = [{email}];
   const htmlContent = generateVerificationCodeEmail(verificationToken);
   try {
-    await transporter.sendMail({
-      from: `"Nirmal Ravidas" <${process.env.SMTP_USER}>`,
+      await client.send({
+      from: sender,
       to: recipient,
       subject: "verify your email.",
       html: htmlContent,
@@ -23,12 +23,12 @@ export const sendVerificationCodeEmail = async (email: string, verificationToken
 };
 
 export const sendWelcomeEmail = async (email: string, name: string) => {
-  const recipient = email;
+  const recipient = [{email}];
   const htmlContent = generateWelcomeEmail(name);
 
   try {
-      await transporter.sendMail({
-      from: `"Nirmal Ravidas" <${process.env.SMTP_USER}>`,
+      await client.send({
+      from: sender,
       to: recipient,
       subject: "Welcome",
       html: htmlContent,
@@ -41,11 +41,11 @@ export const sendWelcomeEmail = async (email: string, name: string) => {
 };
 
 export const sendPasswordResetEmail = async (email: string, resetUrl: string) => {
-  const recipient = email;
+  const recipient = [{email}];
   const htmlContent = generatePasswordResetEmail(resetUrl);
   try {
-      await transporter.sendMail({
-      from: `"Nirmal Ravidas" <${process.env.SMTP_USER}>`,
+      await client.send({
+      from: sender,
       to: recipient,
       subject: "Reset Password",
       html: htmlContent,
@@ -57,11 +57,11 @@ export const sendPasswordResetEmail = async (email: string, resetUrl: string) =>
 };
 
 export const sendPasswordResetSuccessEmail = async (email: string) => {
-  const recipient = email;
+  const recipient = [{email}];
   const htmlContent = generatePasswordResetSuccessEmail();
   try {
-      await transporter.sendMail({
-      from: `"Nirmal Ravidas" <${process.env.SMTP_USER}>`,
+      await client.send({
+      from: sender,
       to: recipient,
       subject: "Password reset successfully.",
       html: htmlContent,
