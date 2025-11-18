@@ -7,8 +7,7 @@ import { useState, type ChangeEvent, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 
 export default function ProfileForm() {
-
-  const {updateProfile, user} = userStore();
+  const { updateProfile, user } = userStore();
   const [profileData, setProfileData] = useState({
     fullname: user?.fullname || "",
     email: user?.email || "",
@@ -17,14 +16,14 @@ export default function ProfileForm() {
     state: user?.state || "",
     country: user?.country || "",
     password: user?.password || "",
-  }) 
+  });
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const {name, value} = e.target;
-    setProfileData({...profileData, [name]: value});
-  }
+    const { name, value } = e.target;
+    setProfileData({ ...profileData, [name]: value });
+  };
 
-  const updateProfileSubmitHandler = async(e: FormEvent<HTMLFormElement>) => {
+  const updateProfileSubmitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
@@ -32,8 +31,7 @@ export default function ProfileForm() {
     } catch (error) {
       console.log(error);
     }
-  }
-
+  };
 
   return (
     <div className="flex items-center justify-center p-10">
@@ -83,6 +81,7 @@ export default function ProfileForm() {
                 readOnly
               />
             </div>
+            
             <div className="col-span-full">
               <Label
                 htmlFor="password"
@@ -99,12 +98,19 @@ export default function ProfileForm() {
                 className="mt-2"
                 readOnly
               />
-              <Link to="/forgot-password" className="mt-2">
-                <Button type="button" variant="outline">
-                  Reset Password
-                </Button>
-              </Link>
+              
+              <div className="mt-4">
+                <Link to="/forgot-password">
+                  <Button
+                    type="button"
+                    className="bg-red-500 text-white hover:bg-red-600"
+                  >
+                    Reset Password
+                  </Button>
+                </Link>
+              </div>
             </div>
+
             <div className="col-span-full">
               <Label
                 htmlFor="address"
@@ -158,9 +164,7 @@ export default function ProfileForm() {
             </div>
 
             <div className="col-span-full sm:col-span-2">
-              <Label
-                className="text-sm font-medium text-foreground dark:text-foreground"
-              >
+              <Label className="text-sm font-medium text-foreground dark:text-foreground">
                 Country
               </Label>
               <Input
