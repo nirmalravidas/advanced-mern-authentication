@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { userStore } from "@/store/useUserStore";
 import { useState, type ChangeEvent, type FormEvent } from "react";
+import { Link } from "react-router-dom";
 
 export default function ProfileForm() {
 
@@ -79,9 +80,30 @@ export default function ProfileForm() {
                 onChange={changeHandler}
                 autoComplete="email"
                 className="mt-2"
-                required
                 readOnly
               />
+            </div>
+            <div className="col-span-full">
+              <Label
+                htmlFor="password"
+                className="text-sm font-medium text-foreground dark:text-foreground"
+              >
+                Password
+                <span className="text-red-500">*</span>
+              </Label>
+              <Input
+                type="password"
+                id="password"
+                name="password"
+                value="*******"
+                className="mt-2"
+                readOnly
+              />
+              <Link to="/forgot-password">
+                <Button type="button" variant="outline">
+                  Reset Password
+                </Button>
+              </Link>
             </div>
             <div className="col-span-full">
               <Label
