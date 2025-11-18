@@ -99,7 +99,7 @@ export default function ProfileForm() {
                 className="mt-2"
                 readOnly
               />
-              <Link to="/forgot-password">
+              <Link to="/forgot-password" className="mt-2">
                 <Button type="button" variant="outline">
                   Reset Password
                 </Button>
